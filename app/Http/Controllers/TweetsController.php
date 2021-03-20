@@ -11,11 +11,11 @@ class TweetsController extends Controller
     {
         // $tweets = Tweet::latest()->get(); 
 
-        return view('home', [
-            'tweet' => auth()->user()->timeline()  // User model has a timeline function
+        return view('tweets.index', [
+            'tweets' => auth()->user()->timeline()  // User model has a timeline function
         ]);
     }
-    
+
     //
     public function store()
     {
@@ -26,6 +26,7 @@ class TweetsController extends Controller
             'body' => $attributes['body']  // this is same as " request('body') " (57)
         ]);
 
-        return redirect('/home');
+        // redirect('/tweets') can also be used
+        return redirect()->route('home');
     }
 }

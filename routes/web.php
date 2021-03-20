@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\TweetsController; // (57)
+use App\Http\Controllers\ProfilesController; // (60)
+use App\Http\Controllers\FollowsController; // (62)
 
 
 
@@ -25,7 +27,11 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/tweets', [TweetsController::class, 'index'])->name('home');
     Route::post('/tweets', [TweetsController::class, 'store']); // storing tweets after post request in form
+
+    Route::post('/profiles/{user:name}/follow', [FollowsController::class, 'store']); // storing follow after post request (62)
 });
+
+Route::get('/profiles/{user:name}', [ProfilesController::class, 'show'])->name('profile');
 
 Auth::routes();
 
