@@ -24,9 +24,9 @@
 <body>
     <div id="app">
 
-<!-- Section does not allow for container to move extreme left and extreme right part of the screen-->
+        <!-- Section does not allow for container to move extreme left and extreme right part of the screen-->
 
-        <section class="px-8 py-4 mb-6"> 
+        <section class="px-8 py-4 mb-6">
             <header class="container mx-auto">
                 <h1>
                     <img src="/images/logo.svg" alt="Tweety">
@@ -34,11 +34,7 @@
             </header>
         </section>
 
-        <section class="px-8">
-            <main class="container mx-auto">
-                @yield('content')
-            </main>
-        </section>
+        {{ $slot }}
 
     </div>
 </body>
