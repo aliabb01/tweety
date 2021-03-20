@@ -6,10 +6,11 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Followable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, Followable; // followable is a trait
 
     /**
      * The attributes that are mass assignable.
@@ -43,7 +44,7 @@ class User extends Authenticatable
 
     public function getAvatarAttribute() // returns the specified attribute (57)
     {
-        return "https://i.pravatar.cc/40?u=" . $this->email;
+        return "https://i.pravatar.cc/200?u=" . $this->email;
     }
 
     public function timeline()  // Shows users timeline (57)
@@ -62,20 +63,17 @@ class User extends Authenticatable
 
     public function tweets()  // returns a users tweets
     {
-        return $this->hasMany(Tweet::class);
+        return $this->hasMany(Tweet::class)->latest();
     }
 
-    public function follow(User $user)   // action to follow a user
-    {
-        return $this->follows()->save($user);
-    }
+    // Can be added directly to web routes in laravel 7 or above
+    // public function getRouteKeyName()  //  OVERRIDING Route-Model binding with a specific column in our case with name (60)
+    // {
+    //     return 'name';    
+    // }
 
-    public function follows() // Relationship between user and followers (58)
+    public function path()   // return the route for profile name (62) 
     {
-        // (58)
-        // $this is needed in laravel 8 and as a 
-        // 2nd argument give the name of the table which is follows in this case
-        // 3rd and 4th arguments are Pivot keys: foreign and related
-        return $this->belongsToMany(User::class, 'follows', 'user_id', 'following_user_id');  
+        return route('profile', $this->name);
     }
 }
