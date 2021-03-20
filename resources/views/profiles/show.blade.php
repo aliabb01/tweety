@@ -4,8 +4,9 @@
         <div class="relative">
             <img src="/images/default-profile-banner.jpg" alt="" class="mb-2">
 
-            <img src="{{ $user->avatar }}" class="rounded-full mr-2 absolute bottom-0 transform -translate-x-1/2 translate-y-1/2"
-               style="left:50%;" width="150" alt="">
+            <img src="{{ $user->avatar }}"
+                class="rounded-full mr-2 absolute bottom-0 transform -translate-x-1/2 translate-y-1/2" style="left:50%;"
+                width="150" alt="">
         </div>
 
         <div class="flex justify-between items-center mb-6">
@@ -16,13 +17,12 @@
             </div>
 
             <div class="flex">
-                <a href="" class="rounded-full border border-gray-300 py-2 px-2 text-black text-xs mr-2">Edit
-                    Profile</a>
+                @can('edit', $user)
+                    <a href="{{ $user->path('edit') }}" class="rounded-full border border-gray-300 py-2 px-2 text-black text-xs mr-2">Edit
+                        Profile</a>
+                @endcan
 
-                <x-follow-button :user="$user">
-
-                </x-follow-button>
-
+                <x-follow-button :user="$user"></x-follow-button> {{-- follow button component --}}
             </div>
         </div>
 
@@ -37,7 +37,8 @@
     </header>
 
     @include('_timeline', [
-    'tweets' => $user->tweets // this makes the application understand that tweets are of user, returns error if not here
+    'tweets' => $user->tweets // this makes the application understand that tweets are of user, returns error if not
+    //here
     ])
 
 </x-app>
