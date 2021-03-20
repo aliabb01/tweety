@@ -29,6 +29,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/tweets', [TweetsController::class, 'store']); // storing tweets after post request in form
 
     Route::post('/profiles/{user:name}/follow', [FollowsController::class, 'store']); // storing follow after post request (62)
+    Route::get('/profiles/{user:name}/edit', [ProfilesController::class, 'edit'])  // route for editing profile with authorization check
+        ->middleware('can:edit,user'); // as an argument in middleware(can:edit) we write the name of the wildcard (63)
+
 });
 
 Route::get('/profiles/{user:name}', [ProfilesController::class, 'show'])->name('profile');
