@@ -72,8 +72,9 @@ class User extends Authenticatable
     //     return 'name';    
     // }
 
-    public function path()   // return the route for profile name (62) 
+    public function path($append='')   // return the route for profile name (62) 
     {
-        return route('profile', $this->name);
+        $path = route('profile', $this->name);
+        return $append ? "{$path}/{$append}" : $path;  // check if append argument is applied, if yes then append it to the path otherwise, just return the path
     }
 }
