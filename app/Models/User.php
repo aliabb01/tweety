@@ -18,6 +18,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'username',
+        'avatar',
         'name',
         'email',
         'password',
@@ -42,9 +44,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function getAvatarAttribute() // returns the specified attribute (57)
+    public function getAvatarAttribute($value) // returns the specified attribute (57)
     {
-        return "https://i.pravatar.cc/200?u=" . $this->email;
+        // return "https://i.pravatar.cc/200?u=" . $this->email;  commented on (64)
+        return asset('storage/' . $value);  // (64) without 'storage/' there will be errors. In addition, asset function creates a link to the image in your application
     }
 
     public function timeline()  // Shows users timeline (57)
@@ -74,7 +77,7 @@ class User extends Authenticatable
 
     public function path($append='')   // return the route for profile name (62) 
     {
-        $path = route('profile', $this->name);
+        $path = route('profile', $this->username);
         return $append ? "{$path}/{$append}" : $path;  // check if append argument is applied, if yes then append it to the path otherwise, just return the path
     }
 }
