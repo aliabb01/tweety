@@ -18,12 +18,14 @@ trait Followable
 
     public function toggleFollow(User $user)
     {
-        if ($this->following($user))   // $this = auth()->user()
-        { 
-            return $this->unfollow($user);
-        } 
+        // if ($this->following($user))   // $this = auth()->user()
+        // { 
+        //     return $this->unfollow($user);
+        // } 
         
-        return $this->follow($user);  // have the authenticated user follow the given user
+        // return $this->follow($user);  // have the authenticated user follow the given user
+
+        $this->follows()->toggle($user);  // (65) toggle the follow/unfollow. basically the same thing above
     }
 
     public function follows() // Relationship between user and followers (58)
