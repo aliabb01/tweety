@@ -6,8 +6,7 @@ use App\Http\Controllers\TweetsController; // (57)
 use App\Http\Controllers\ProfilesController; // (60)
 use App\Http\Controllers\FollowsController; // (62)
 use App\Http\Controllers\ExploreController; // (65)
-
-
+use App\Http\Controllers\TweetLikesController; // (67)
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +27,9 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/tweets', [TweetsController::class, 'index'])->name('home');
     Route::post('/tweets', [TweetsController::class, 'store']); // storing tweets after post request in form
+
+    Route::post('/tweets/{tweet}/like', [TweetLikesController::class, 'store']);  // request to like a tweet (67)
+    Route::delete('/tweets/{tweet}/like', [TweetLikesController::class, 'destroy']);  // request to destory(delete) a like to a tweet (67)
 
     Route::post('/profiles/{user:username}/follow', [FollowsController::class, 'store'])->name('follow'); //updated name('follow') in (65) // storing follow after post request (62)
 
