@@ -14,7 +14,7 @@
                             Email
                         </label>
 
-                        <input type="text" class="border border-gray-400 p-2 w-full" name="email" id="email"
+                        <input type="email" class="border border-gray-400 p-2 w-full" name="email" id="email"
                             autocomplete="email" value="{{ old('email') }}" required>
 
                         @error('email')
@@ -27,7 +27,7 @@
                             Password
                         </label>
 
-                        <input type="text" class="border border-gray-400 p-2 w-full" name="password" id="password"
+                        <input type="password" class="border border-gray-400 p-2 w-full" name="password" id="password"
                             autocomplete="current-password" value="{{ old('password') }}" required>
 
                         @error('password')

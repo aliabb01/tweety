@@ -56,7 +56,7 @@
                             Password
                         </label>
 
-                        <input type="text" class="border border-gray-400 p-2 w-full" name="password" id="password"
+                        <input type="password" class="border border-gray-400 p-2 w-full" name="password" id="password"
                             autocomplete="current-password" value="{{ old('password') }}" required>
 
                         @error('password')
@@ -65,14 +65,14 @@
                     </div>
 
                     <div class="mb-6">
-                        <label for="password-confirm" class="block mb-2 uppercase font-bold text-xs text-gray-700">
+                        <label for="password_confirmation" class="block mb-2 uppercase font-bold text-xs text-gray-700">
                             Password Confirmation
                         </label>
 
-                        <input id="password-confirm" type="password" class="border border-gray-400 p-2 w-full"
-                            name="password" name="password_confirmation" required autocomplete="new-password">
+                        <input id="password_confirmation" type="password" class="border border-gray-400 p-2 w-full"
+                             name="password_confirmation" required autocomplete="password_confirmation">
 
-                        @error('password-confirm')
+                        @error('password_confirmation')
                         <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
                         @enderror
                     </div>
