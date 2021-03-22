@@ -67,6 +67,7 @@ class User extends Authenticatable
 
         return Tweet::whereIn('user_id', $friends)  // return the user_id columns that match $ids variable, sort them by latest
             ->orWhere('user_id', $this->id) // and return a user id which matches the current users id
+            ->withLikes()  // (67) withLikes is taken from Likeable trait
             ->latest()
             ->paginate(20);  // (66) pagination added here to solve error when in home page
     }
@@ -74,6 +75,11 @@ class User extends Authenticatable
     public function tweets()  // returns a users tweets
     {
         return $this->hasMany(Tweet::class)->latest();
+    }
+
+    public function likes() // relationship between user and his likes
+    {
+        return $this->hasMany(Like::class);
     }
 
     // Can be added directly to web routes in laravel 7 or above
