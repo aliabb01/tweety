@@ -47,7 +47,13 @@ class User extends Authenticatable
     public function getAvatarAttribute($value) // returns the specified attribute (57)
     {
         // return "https://i.pravatar.cc/200?u=" . $this->email;  commented on (64)
-        return asset('storage/' . $value);  // (64) without 'storage/' there will be errors. In addition, asset function creates a link to the image in your application
+        // return asset('storage/' . $value);  // (64) without 'storage/' there will be errors. In addition, asset function creates a link to the image in your application
+        return asset($value ? 'storage/' .$value : 'images/default-avatar.jpg');  // (65) check if there is a value passed, if yes then return asset from storage value, otherwise, go to default profile pic
+    }
+
+    public function setPasswordAttribute($value)  // (65) hashing the password
+    {
+        $this->attributes['password'] = bcrypt($value);
     }
 
     public function timeline()  // Shows users timeline (57)
