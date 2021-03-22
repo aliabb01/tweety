@@ -14,7 +14,7 @@ class ProfilesController extends Controller
         // new additions in 66 below
         return view('profiles.show', [
             'user' => $user,
-            'tweets' => $user->tweets()->paginate(20), // (66) paginate the tweets in user profile timeline. This will cause error. To fix go to User model -> timeline() func
+            'tweets' => $user->tweets()->withLikes()->paginate(20), // (66) paginate the tweets in user profile timeline. This will cause error. To fix go to User model -> timeline() func. (67) With likes method added
         ]);
     }
 
