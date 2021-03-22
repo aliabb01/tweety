@@ -11,15 +11,16 @@
 
         <div class="flex justify-between items-center mb-6">
             {{-- items center class aligns items vertically centered --}}
-            <div>
+            <div style="max-width: 270px;">
                 <h2 class="font-bold text-2xl mb-0">{{ $user->name }}</h2>
                 <p class="text-sm">Joined {{ $user->created_at->diffForHumans() }}</p>
             </div>
 
             <div class="flex">
                 @can('edit', $user)
-                    <a href="{{ $user->path('edit') }}" class="rounded-full border border-gray-300 py-2 px-2 text-black text-xs mr-2">Edit
-                        Profile</a>
+                <a href="{{ $user->path('edit') }}"
+                    class="rounded-full border border-gray-300 py-2 px-2 text-black text-xs mr-2">Edit
+                    Profile</a>
                 @endcan
 
                 <x-follow-button :user="$user"></x-follow-button> {{-- follow button component --}}
@@ -37,8 +38,10 @@
     </header>
 
     @include('_timeline', [
-    'tweets' => $user->tweets // this makes the application understand that tweets are of user, returns error if not
-    //here
+    // 'tweets' => $user->tweets // this makes the application understand that tweets are of user, returns error if not
+    //here // this line and above was commented(not used) in 66
+    // instead we now use this
+    'tweets'=>$tweets
     ])
 
 </x-app>

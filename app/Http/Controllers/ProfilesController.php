@@ -10,7 +10,12 @@ class ProfilesController extends Controller
 {
     public function show(User $user) // (60)
     {
-        return view('profiles.show', compact('user'));
+        // return view('profiles.show', compact('user')); // in 66 this became commented
+        // new additions in 66 below
+        return view('profiles.show', [
+            'user' => $user,
+            'tweets' => $user->tweets()->paginate(20), // (66) paginate the tweets in user profile timeline. This will cause error. To fix go to User model -> timeline() func
+        ]);
     }
 
     public function edit(User $user)

@@ -67,7 +67,8 @@ class User extends Authenticatable
 
         return Tweet::whereIn('user_id', $friends)  // return the user_id columns that match $ids variable, sort them by latest
             ->orWhere('user_id', $this->id) // and return a user id which matches the current users id
-            ->latest()->get();  
+            ->latest()
+            ->paginate(20);  // (66) pagination added here to solve error when in home page
     }
 
     public function tweets()  // returns a users tweets
