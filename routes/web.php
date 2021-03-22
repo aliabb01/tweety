@@ -37,7 +37,8 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/profiles/{user:username}', [ProfilesController::class, 'update'])
         ->middleware('can:edit,user');
 
-    Route::get('/explore', [ExploreController::class, 'index']); // (65)
+    // Route::get('/explore', [ExploreController::class, 'index']);  // (65) Initial ExploreController
+    Route::get('/explore', ExploreController::class);   // (66) Changing for invokable controller. Invokable controller - a controller that has a single action
 });
 
 Route::get('/profiles/{user:username}', [ProfilesController::class, 'show'])->name('profile');
